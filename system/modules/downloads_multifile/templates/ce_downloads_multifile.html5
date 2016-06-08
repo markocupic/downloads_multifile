@@ -1,0 +1,22 @@
+<?php $this->extend('block_searchable'); ?>
+
+<?php $this->block('content'); ?>
+<div class="multifile-downloads-link-container">
+    <a href="#"><?= $GLOBALS['TL_LANG']['CTE']['ce_downloads']['downloadMultipleFiles'] ?></a>
+</div>
+
+<ul>
+    <?php foreach ($this->files as $file): ?>
+    <li><input class="checkbox" type="checkbox" value="<?= $file['id'] ?>"><?= Image::getHtml($file['icon'], '', 'class="mime_icon"') ?> <a href="<?= $file['href'] ?>" title="<?= $file['title'] ?>"><?= $file['link'] ?> <span class="size">(<?= $file['filesize'] ?>)</span></a></li>
+    <?php endforeach; ?>
+</ul>
+
+<div class="multifile-downloads-select-all-container" style="display:none">
+    <a href="#"><?= $GLOBALS['TL_LANG']['CTE']['ce_downloads']['selectAll'] ?></a>
+</div>
+
+<div class="multifile-downloads-button-container">
+    <button class="button"><?= $GLOBALS['TL_LANG']['CTE']['ce_downloads']['downloadButton'] ?></button>
+</div>
+
+<?php $this->endblock(); ?>

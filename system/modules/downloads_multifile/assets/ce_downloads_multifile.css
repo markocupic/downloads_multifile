@@ -1,0 +1,23 @@
+.ce_downloads ul > li input[type="checkbox"] {
+    display: none;
+}
+
+.ce_downloads ul.show-checkbox > li input[type="checkbox"] {
+    display: inline;
+}
+
+.ce_downloads .multifile-download-link-container a {
+    cursor: pointer;
+}
+
+.ce_downloads .multifile-downloads-button-container {
+    display: none;
+}
+
+.ce_downloads .multifile-downloads-select-all-container {
+    display: none;
+}
+
+.ce_downloads ul.show-checkbox li a {
+    cursor: default;
+}

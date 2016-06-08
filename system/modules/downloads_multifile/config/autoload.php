@@ -24,7 +24,7 @@ ClassLoader::addNamespaces(array
 ClassLoader::addClasses(array
 (
 	// Classes
-	'MCupic\MultifileDownloadsHelper' => 'system/modules/downloads_multifile/classes/MultifileDownloadsHelper.php',
+	'MCupic\MultifileDownloads' => 'system/modules/downloads_multifile/classes/MultifileDownloads.php',
 ));
 
 
