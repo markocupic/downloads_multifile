@@ -4,32 +4,33 @@
 (function ($) {
     $().ready(function () {
 
-        // Download language data from xhr
-        if (typeof ceDownloadsLang === 'undefined') {
-            ceDownloadsLang = {};
-            $.ajax({
-                    url: window.location.href,
-                    type: 'get',
-                    dataType: 'json',
-                    data: {
-                        'loadLanguageData': 'true',
-                        'ceDownloads': 'true'
-                    }
-                })
-                .done(function (resp) {
-
-                    if (resp.done == 'true') {
-                        $.each(resp, function (index, value) {
-                            ceDownloadsLang[index] = value;
-                        });
-                    }
-                })
-                .fail(function () {
-                    //
-                })
-                .always(function () {
-                    //
-                });
+        if ($('.multifile-downloads-link-container').length) {
+            // Download language data from xhr
+            if (typeof ceDownloadsLang === 'undefined') {
+                ceDownloadsLang = {};
+                $.ajax({
+                        url: window.location.href,
+                        type: 'get',
+                        dataType: 'json',
+                        data: {
+                            'loadLanguageData': 'true',
+                            'ceDownloads': 'true'
+                        }
+                    })
+                    .done(function (resp) {
+                        if (resp.done == 'true') {
+                            $.each(resp, function (index, value) {
+                                ceDownloadsLang[index] = value;
+                            });
+                        }
+                    })
+                    .fail(function () {
+                        //
+                    })
+                    .always(function () {
+                        //
+                    });
+            }
         }
 
 
