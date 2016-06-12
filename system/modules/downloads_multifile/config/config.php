@@ -9,8 +9,10 @@
 if (TL_MODE == 'FE')
 {
 
-    $GLOBALS['TL_HOOKS']['initializeSystem'][] = array('\MCupic\MultifileDownloads', 'initializeSystem');
+    // Hook
+    $GLOBALS['TL_HOOKS']['getContentElement'][] = array('\MCupic\MultifileDownloads', 'getContentElement');
 
+    // Resources
     $GLOBALS['TL_CSS'][] = 'system/modules/downloads_multifile/assets/ce_downloads_multifile.css';
     $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/downloads_multifile/assets/ce_downloads_multifile.js';
 }

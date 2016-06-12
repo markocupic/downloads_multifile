@@ -8,13 +8,15 @@
             // Download language data from xhr
             if (typeof ceDownloadsLang === 'undefined') {
                 ceDownloadsLang = {};
+                var ceElId = $('.multifile-downloads-link-container').first().attr('data-ceid');
                 $.ajax({
                         url: window.location.href,
                         type: 'get',
                         dataType: 'json',
                         data: {
                             'loadLanguageData': 'true',
-                            'ceDownloads': 'true'
+                            'ceDownloads': 'true',
+                            'ceId': ceElId
                         }
                     })
                     .done(function (resp) {
@@ -46,9 +48,11 @@
                     files.push(input.attr('value'));
                 }
             });
+            // Get content element id
+            var ceId = $(this).closest('.ce_downloads').find('.multifile-downloads-link-container').attr('data-ceid');
 
             if (files.length > 0) {
-                var path = window.location.href + '?zipDownload=true&files=' + files.join();
+                var path = window.location.href + '?zipDownload=true&elId=' + ceId + '&files=' + files.join();
                 window.location.href = path;
             } else {
                 alert(ceDownloadsLang.pleaseSelectOneFile)

@@ -1,7 +1,7 @@
 <?php $this->extend('block_searchable'); ?>
 
 <?php $this->block('content'); ?>
-<div class="multifile-downloads-link-container">
+<div class="multifile-downloads-link-container" data-ceid="<?= $this->id ?>">
     <a href="#"><?= $GLOBALS['TL_LANG']['CTE']['ce_downloads']['downloadMultipleFiles'] ?></a>
 </div>
 
