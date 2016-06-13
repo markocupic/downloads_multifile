@@ -15,7 +15,7 @@ class MultifileDownloads
      * Path to zip-archive
      * @var string
      */
-    public $archivePath = 'files/downloads_multifile';
+    public $archivePath = 'system/tmp/downloads_multifile';
 
     /**
      * Content element model
@@ -220,21 +220,25 @@ class MultifileDownloads
      */
     protected function deleteOldFolders()
     {
-        foreach (scan(TL_ROOT . '/' . $this->archivePath) as $strFolder)
+        if(file_exists(TL_ROOT . '/' . $this->archivePath))
         {
-            if (is_dir(TL_ROOT . '/' . $this->archivePath . '/' . $strFolder))
+            foreach (scan(TL_ROOT . '/' . $this->archivePath) as $strFolder)
             {
-                if (is_numeric($strFolder))
+                if (is_dir(TL_ROOT . '/' . $this->archivePath . '/' . $strFolder))
                 {
-                    if (time() - 3600 > intval($strFolder))
+                    if (is_numeric($strFolder))
                     {
-                        $objFolder = new \Folder($this->archivePath . '/' . $strFolder);
-                        $objFolder->purge();
-                        $objFolder->delete();
+                        if (time() - 3600 > intval($strFolder))
+                        {
+                            $objFolder = new \Folder($this->archivePath . '/' . $strFolder);
+                            $objFolder->purge();
+                            $objFolder->delete();
+                        }
                     }
                 }
             }
         }
+
     }
 
 
@@ -250,14 +254,14 @@ class MultifileDownloads
         $time = time();
 
         // Set zip-archive name/path
-        $zipFilePath = $this->archivePath . '/' . $time . '/archive_' . $time . '.zip';
+        $zipFilePath = $this->archivePath . '/' . $time . '/archive.zip';
 
         // Create zip-archive folder
         new \Folder($this->archivePath . '/' . $time, true);
 
         // Initialize archive object
         $zip = new \ZipWriter($zipFilePath);
-        $i = 0;
+
         // Add files to zip-archive
         foreach ($this->arrFileIDS as $id)
         {
@@ -266,8 +270,7 @@ class MultifileDownloads
             {
                 if (is_file(TL_ROOT . '/' . $objFile->path))
                 {
-                    \Files::getInstance()->copy($objFile->path, $this->archivePath . '/' . $time . '/' . $objFile->name);
-                    $zip->addFile($this->archivePath . '/' . $time . '/' . $objFile->name);
+                    $zip->addFile($objFile->path, $objFile->name);
                 }
             }
         }
